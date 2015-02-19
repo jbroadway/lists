@@ -26,7 +26,7 @@
 	</tr>
 {% foreach members %}
 	<tr>
-		<td><a	href="/user/details?id={{ loop_value->id }}">{{ loop_value->name }}</a></td>
+		<td><a href="/user/details?id={{ loop_value->id }}">{{ loop_value->name }}</a></td>
 		<td><div class="editable-text" id="{{loop_value->id}}" data-property="notes">{{ loop_value->notes }}</div></td>
 		<td style="text-align: right">
 			{% if User::require_acl ('admin/delete') %}
