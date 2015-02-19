@@ -17,7 +17,7 @@ $page->title = sprintf (
 $page->window_title = $list->name;
 
 $list = $list->orig ();
-$list->members = lists\Member::query ('m.id, m.notes, u.name')
+$list->members = lists\Member::query ('m.id, m.notes, u.id as user_id, u.name')
 	->from ('#prefix#lists_member m, #prefix#user u')
 	->where ('m.user = u.id')
 	->where ('m.list', $_GET['id'])
@@ -25,7 +25,7 @@ $list->members = lists\Member::query ('m.id, m.notes, u.name')
 	->fetch_orig ();
 $list->chosen = array ();
 foreach ($list->members as $member) {
-	$list->chosen[] = $member->id;
+	$list->chosen[] = $member->user_id;
 }
 
 echo $tpl->render ('lists/edit', $list);
