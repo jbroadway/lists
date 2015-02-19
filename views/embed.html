@@ -1,0 +1,9 @@
+<ul class="member-list">
+{% foreach members as member %}
+	{% if emails %}
+		<li><a href="mailto:{{member->email}}">{{member->name}}</a></li>
+	{% else %}
+		<li>{{member->name}}</li>
+	{% end %}
+{% end %}
+</ul>

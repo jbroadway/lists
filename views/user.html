@@ -1,0 +1,5 @@
+<ul>
+{% foreach lists as list %}
+	<li><a href="/lists/edit?id={{list->id}}">{{list->name}}</a></li>
+{% end %}
+</ul>
