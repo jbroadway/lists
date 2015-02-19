@@ -1,0 +1,5 @@
+; <?php /*
+
+lists = "Manage lists"
+
+; */ ?>

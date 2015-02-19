@@ -1,0 +1,63 @@
+{! user/util/userchooser !}
+
+<p>
+	<a href="/lists/admin">&laquo; {"Back"}</a>
+	&nbsp;|&nbsp;
+	<a href="#" id="add-member">{"Add member"}</a>
+	&nbsp;|&nbsp;
+	<a href="/lists/message?id={{id}}">{"Message"}</a>
+	&nbsp;|&nbsp;
+	<a href="/lists/export?id={{id}}">{"Export"}</a>
+	&nbsp;|&nbsp;
+	<a href="/lists/duplicate?id={{id}}">{"Duplicate"}</a>
+	&nbsp;|&nbsp;
+	<a href="/lists/delete" data-id="{{id}}" onclick="return $.confirm_and_post (this, {"Are you sure you want to delete this list?"}')">{"Delete"}</a>	
+</p>
+
+<b>{"Description"}:</b><br />
+<div class="editable-textarea" data-property="description" id="{{id}}">{{description}}</div>
+
+<p>
+<table width="100%">
+	<tr>
+		<th width="42%">{" Name "}</th>
+		<th width="42%">{" Notes "}</th>
+		<th width="16%">&nbsp;</th>
+	</tr>
+{% foreach members %}
+	<tr>
+		<td><a	href="/user/details?id={{ loop_value->id }}">{{ loop_value->name }}</a></td>
+		<td><div class="editable-text" id="{{loop_value->id}}" data-property="notes">{{ loop_value->notes }}</div></td>
+		<td style="text-align: right">
+			{% if User::require_acl ('admin/delete') %}
+			<a	href="/lists/remove"
+				data-id="{{ loop_value->id }}"
+				data-list="{{ id }}"
+				onclick="return $.confirm_and_post (this, '{"Are you sure you want to remove this member?"}')">{"Remove"}</a>
+			{% end %}
+		</td>
+	</tr>
+{% end %}
+</table>
+</p>
+
+<form id="add-member-form" method="post" action="/lists/addmember">
+	<input type="hidden" name="list" value="{{id}}" />
+	<input type="hidden" name="user" id="user-id" value="" />
+</form>
+
+<script>
+$(function () {
+	$('#add-member').click (function (e) {
+		e.preventDefault ();
+		
+		$.userchooser ({
+			chosen: [{{ join (', ', $data->chosen) }}],
+			callback: function (user_id) {
+				$('#user-id').val (user_id);
+				$('#add-member-form').submit ();
+			}
+		});
+	});
+});
+</script>

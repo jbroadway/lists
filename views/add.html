@@ -1,0 +1,22 @@
+<div class="form">
+<form method="post" id="{{ _form }}">
+
+<p>
+	{"Name"}:<br />
+	<input type="text" name="name" value="{{ name|quotes }}" size="40" />
+	<span class="notice" id="name-notice">{"Please enter a list name."}</span>
+</p>
+
+<p>
+	{"Description"}:<br />
+	<textarea name="description" cols="60" rows="4">{{ description }}</textarea>
+</p>
+
+<p>
+	<input type="submit" value="{"Create List"}" />
+	&nbsp;
+	<a href="/lists/admin" onclick="return confirm ('{"Are you sure you want to cancel and lose any changes?"}')">{"Cancel"}</a>
+</p>
+
+</form>
+</div>
