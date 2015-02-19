@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 $m = new lists\Member;
 $m->remove ($_POST['id']);
 
-if ($list->error) {
+if ($m->error) {
 	error_log ('Error deleting member: ' . DB::error ());
 	$this->add_notification (__ ('Unable to remove member.'));
 	$this->redirect ('/lists/edit?id=' . Template::sanitize ($_POST['list']));
