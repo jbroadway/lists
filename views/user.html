@@ -1,5 +1,13 @@
+{% if count ($data->lists) == 0 %}
+<p><b>{"Not on any lists."}</b></p>
+{% else %}
+<p><b>{"Belongs to"}:</b></p>
+
 <ul>
 {% foreach lists as list %}
 	<li><a href="/lists/edit?id={{list->id}}">{{list->name}}</a></li>
 {% end %}
 </ul>
+{% end %}
+
+<p><a href="/lists/admin">{"All lists"}</a></p>
