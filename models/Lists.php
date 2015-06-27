@@ -14,6 +14,16 @@ class Lists extends \Model {
 	public $table = '#prefix#lists';
 	public $key = 'id';
 	
+	/**
+	 * Display name for this model type.
+	 */
+	public static $display_name = 'Member List';
+	
+	/**
+	 * Plural display name for this model type.
+	 */
+	public static $plural_name = 'Member Lists';
+	
 	public static function embed_lists () {
 		$lists = self::query ('id, name')
 			->order ('name', 'asc')
